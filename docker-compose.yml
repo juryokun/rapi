@@ -1,0 +1,31 @@
+version: '3'
+services:
+  rapi:
+    container_name: rapi
+    build: ./rapi
+    volumes:
+      - ./rapi:/opt/apps
+    ports:
+      - "13000:3000"
+    networks:
+      - rnet
+
+  postgres:
+    build: ./postgres
+    volumes:
+      - pgdata_store:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "15432:5432"
+    networks:
+      - rnet
+
+volumes:
+  pgdata_store:
+    driver: local
+
+networks:
+  rnet:
+    driver: bridge
