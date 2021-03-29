@@ -9,6 +9,7 @@ services:
       - "13000:3000"
     networks:
       - rnet
+    tty: true
 
   postgres:
     build: ./postgres
