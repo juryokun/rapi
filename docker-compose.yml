@@ -4,7 +4,7 @@ services:
     container_name: rapi
     build: ./rapi
     volumes:
-      - ./rapi:/opt/apps
+      - ./rapi:/apps/rapi
     ports:
       - "13000:3000"
     networks:
@@ -12,6 +12,7 @@ services:
     tty: true
 
   postgres:
+    container_name: postgres
     build: ./postgres
     volumes:
       - pgdata_store:/var/lib/postgresql/data
@@ -29,4 +30,3 @@ volumes:
 
 networks:
   rnet:
-    driver: bridge

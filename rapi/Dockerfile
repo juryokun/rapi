@@ -1,4 +1,6 @@
 FROM rust
 
-WORKDIR /usr/src/rapi
+WORKDIR /apps/rapi
 COPY . .
+
+RUN cargo install diesel_cli --no-default-features --features postgres
