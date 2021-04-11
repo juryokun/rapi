@@ -6,10 +6,14 @@ body {
 
 body {
   background: #f5f7fa;
-  padding: 40px 0;
   box-sizing: border-box;
   font-family: Montserrat, "sans-serif";
   color: #51565d;
+}
+
+header .site-header {
+  color: #FFF;
+  padding: 10px 0px 10px 20px;
 }
 
 .calendar {
