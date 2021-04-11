@@ -16,9 +16,11 @@ use diesel::prelude::*;
 use dotenv::dotenv;
 use std::env;
 
-use actix_web::{dev, web, http, App, HttpServer, HttpResponse, Error, error};
-use actix_web::middleware::{errhandlers::ErrorHandlers, errhandlers::ErrorHandlerResponse};
 use actix_files as fs;
+use actix_web::middleware::{errhandlers::ErrorHandlerResponse, errhandlers::ErrorHandlers};
+use actix_web::{
+    dev, error, get, http, middleware, web, App, Error, HttpResponse, HttpServer, Responder,
+};
 use tera::Tera;
 
 //Sqliteコネクションを作る。
@@ -30,24 +32,21 @@ pub fn establish_connection() -> PgConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-// async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
-//     use schema::posts::dsl::*;
-//     let connection = establish_connection();
-//     let result = posts
-//         // .limit(5)
-//         .first::<Post>(&connection)
-//         .expect("Error loading posts");
+async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
+    use schema::posts::dsl::*;
+    let connection = establish_connection();
+    let result = posts
+        // .limit(5)
+        .first::<Post>(&connection)
+        .expect("Error loading posts");
 
-//     let mut ctx = tera::Context::new();
-//     ctx.insert("name", &result.title);
-//     let view =
-//         tmpl.render("index.html", &ctx)
-//             .map_err(|e| error::ErrorInternalServerError(e))?;
+    let mut ctx = tera::Context::new();
+    ctx.insert("name", &result.title);
+    let view = tmpl
+        .render("index.html", &ctx)
+        .map_err(|e| error::ErrorInternalServerError(e))?;
 
-//     Ok(HttpResponse::Ok().content_type("text/html").body(view))
-// }
-async fn index() -> Result<HttpResponse, Error> {
-    Ok(HttpResponse::Ok().content_type("text/plain").body("Hello World"))
+    Ok(HttpResponse::Ok().content_type("text/html").body(view))
 }
 
 fn not_found<B>(res: dev::ServiceResponse<B>) -> actix_web::Result<ErrorHandlerResponse<B>> {
@@ -59,27 +58,29 @@ fn not_found<B>(res: dev::ServiceResponse<B>) -> actix_web::Result<ErrorHandlerR
     ))
 }
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    std::env::set_var("RUST_LOG", "actix_web=INFO");
+    env_logger::init();
 
-    HttpServer::new( || {
+    HttpServer::new(|| {
+        let error_handlers = ErrorHandlers::new().handler(http::StatusCode::NOT_FOUND, not_found);
+        let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
+
         App::new()
-            .service(web::resource("/").to(index))
+            .data(tera)
+            .wrap(error_handlers)
+            .wrap(middleware::Logger::default())
+            // .service(fs::Files::new("/templates", ".").show_files_listing())
+            .service(fs::Files::new(
+                "/static",
+                std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("static"),
+            ))
+            .route("/index", web::get().to(index))
+        // .service(web::resource("/").route(web::get().to(index)))
+        // .service(fs::Files::new("/", "./templates").route(web::get().to(index)))
     })
-    // HttpServer::new( || {
-
-    //     let error_handlers = ErrorHandlers::new()
-    //         .handler(http::StatusCode::NOT_FOUND, not_found);
-    //     // let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
-    //     let tera = Tera::new("templates/**/*").unwrap();
-
-
-    //     App::new()
-    //         .data(tera)
-    //         .wrap(error_handlers)
-    //         .service(web::resource("/").route(web::get().to(index)))
-    // })
-    .bind("localhost:3000")?
+    .bind("0.0.0.0:3000")?
     .run()
     .await
 }
