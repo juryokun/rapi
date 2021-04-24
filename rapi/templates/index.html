@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="/static/index.css">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit-icons.min.js"></script>
+
+    <title>Actix web</title>
+</head>
+
+<body>
+    <!-- ファイル分ける  -->
+    <header class="uk-background-primary" uk-sticky>
+        <div class="uk-padding-small site-header" uk-grid>
+            <div class-="uk-width-auto">
+                <a class="site-header" href="#offcanvas-usage" uk-toggle uk-icon="icon: menu; ratio: 1.4"></a>
+            </div>
+            <div class="uk-width-expand">
+                <h1 class="uk-heading-medium site-header">
+                    Treating History
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- ファイル分ける  -->
+    <div id="offcanvas-usage" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <h3>Title</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>
+                12月
+                <button>▾</button>
+            </h1>
+            <p>2018</p>
+        </div>
+        <div class="calendar"><span class="day-name">月</span><span class="day-name">火</span><span
+                class="day-name">水</span><span class="day-name">木</span><span class="day-name">金</span><span
+                class="day-name blue">土</span><span class="day-name red">日</span>
+            <div class="day day--disabled">30</div>
+            <div class="day day--disabled">31</div>
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+            <div class="day">28</div>
+            <div class="day">29</div>
+            <div class="day">30</div>
+            <div class="day">31</div>
+            <div class="day day--disabled">1</div>
+            <div class="day day--disabled">2</div>
+            <section class="task task--warning">プロジェクト見積もり</section>
+            <section class="task task--danger">デザイン・打ち合わせ</section>
+            <section class="task task--primary">コーディング
+                <div class="task__detail">
+                    <h2>担当</h2>
+                    <p>田中・高橋・鈴木</p>
+                </div>
+            </section>
+            <section class="task task--info">ローンチ</section>
+        </div>
+    </div>
+
+</body>
+
+</html>
