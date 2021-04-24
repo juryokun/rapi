@@ -18,16 +18,37 @@ header .site-header {
   vertical-align: middle;
 }
 
+.body {
+  height: 100vh;
+}
+
+.header {
+  height: 50px;
+}
+
+.main{
+  padding-top: 10px;
+}
+.flex-add {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
 .cal-body .day-bk {
   color: #98a0a6;
-  height: 120px;
-  width: calc(100% / 7);
+  /* height: calc(100vh / 6); */
+  /* width: calc(100% / 7); */
 }
 .week-day {
   width: calc(100% / 7);
 }
 .week .uk-card-default{
   background-color: #CCCCCC;
+}
+
+.week {
+  flex-grow: 0;
 }
 .day-sat {
   color: #34A0F2;
@@ -49,4 +70,12 @@ header .site-header {
 }
 .ptfont {
   font-size: 1.8em;
+}
+
+.area {
+  height: 100%;
+}
+
+.cal-header {
+  flex-grow: 0;
 }

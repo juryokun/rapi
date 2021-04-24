@@ -16,72 +16,79 @@
 </head>
 
 <body>
-    <!-- ファイル分ける  -->
-    <header class="uk-background-primary" uk-sticky>
-        <div class="uk-padding-small site-header" uk-grid>
-            <div class-="uk-width-auto">
-                <a class="site-header" href="#offcanvas-usage" uk-toggle uk-icon="icon: menu; ratio: 1.4"></a>
-            </div>
-            <div class="uk-width-expand">
-                <h1 class="uk-heading-medium site-header">
-                    Treating History
-                </h1>
-            </div>
-        </div>
-    </header>
-
-    <!-- ファイル分ける  -->
-    <div id="offcanvas-usage" uk-offcanvas>
-        <div class="uk-offcanvas-bar">
-
-            <button class="uk-offcanvas-close" type="button" uk-close></button>
-
-            <h3>Title</h3>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.</p>
-
-        </div>
-    </div>
-
-    <div class="uk-container uk-container-expand">
-        <div class="calendar-area uk-flex uk-flex-column">
-            <div class="">
-                <div class="cal-header">
-                    <h1>
-                        2021年4月
-                    </h1>
-                </div>
-            </div>
-            <div>
-                <div class="uk-flex week">
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="day-sun">日</span>
+    <div class="uk-flex uk-flex-column body">
+        <div class="header uk-height-auto">
+            <!-- ファイル分ける  -->
+            <header class="uk-background-primary" uk-sticky>
+                <div class="uk-padding-small site-header" uk-grid>
+                    <div class-="uk-width-auto">
+                        <a class="site-header" href="#offcanvas-usage" uk-toggle uk-icon="icon: menu; ratio: 1.4"></a>
                     </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="">月</span>
-                    </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="">火</span>
-                    </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="">水</span>
-                    </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="">木</span>
-                    </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="">金</span>
-                    </div>
-                    <div class="week-day uk-card-default uk-text-center">
-                        <span class="day-sat">土</span>
+                    <div class="uk-width-expand">
+                        <h1 class="uk-heading-medium site-header">
+                            Treating History
+                        </h1>
                     </div>
                 </div>
+            </header>
+
+            <!-- ファイル分ける  -->
+            <div id="offcanvas-usage" uk-offcanvas>
+                <div class="uk-offcanvas-bar">
+
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+                    <h3>Title</h3>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip
+                        ex ea commodo consequat.</p>
+
+                </div>
             </div>
-            <div class="cal-body">
-                <div class="uk-flex uk-flex-wrap">
-                    <div class="day-bk uk-background-muted uk-card-default uk-position-relative">
+        </div>
+
+        <div class="flex-add main">
+            <div class="uk-container uk-container-expand area">
+                <div class="calendar-area uk-flex uk-flex-column area">
+                    <div class="cal-header flex-add">
+                        <h1 class="">
+                            <span class="">2021年4月</span>
+                            <a class="uk-button uk-button-default uk-button-small" uk-icon="icon: chevron-left"
+                                href="#"></a>
+                            <a class="uk-button uk-button-default uk-button-small" uk-icon="icon: chevron-right"
+                                href="#"></a>
+                        </h1>
+                    </div>
+                    <div class="uk-flex week flex-add">
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="day-sun">日</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="">月</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="">火</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="">水</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="">木</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="">金</span>
+                        </div>
+                        <div class="week-day uk-card-default uk-text-center">
+                            <span class="day-sat">土</span>
+                        </div>
+                    </div>
+                    <div class="cal-body flex-add uk-flex uk-flex-column">
+                        <!-- <div class=" uk-flex uk-flex-wrap"> -->
+                        <!-- <div class="day-bk uk-background-muted uk-card-default uk-position-relative">
                         <div class="uk-padding-small day-sun">28</div>
                         <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt</div>
                     </div>
@@ -249,114 +256,242 @@
                         <div class="uk-padding-small">8</div>
                         <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt</div>
                     </div>
-                </div>
-                <!-- <div class="uk-flex uk-margin-remove">
-                    <div class="day-bk day-sun uk-card-default uk-width-1-7">4</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">5</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">6</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">7</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">8</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">9</div>
-                    <div class="day-bk day-sta uk-card-default uk-width-1-7">10</div>
-                </div>
-                <div class="uk-flex uk-margin-remove">
-                    <div class="day-bk day-sun uk-card-default uk-width-1-7">11</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">12</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">13</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">14</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">15</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">16</div>
-                    <div class="day-bk day-sta uk-card-default uk-width-1-7">17</div>
-                </div>
-                <div class="uk-flex uk-margin-remove">
-                    <div class="day-bk day-sun uk-card-default uk-width-1-7">18</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">19</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">20</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">21</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">22</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">23</div>
-                    <div class="day-bk day-sta day-today uk-card-default uk-width-1-7">24</div>
-                </div>
-                <div class="uk-flex uk-margin-remove">
-                    <div class="day-bk day-sun uk-card-default uk-width-1-7">25</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">26</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">27</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">28</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">29</div>
-                    <div class="day-bk uk-card-default uk-width-1-7">30</div>
-                    <div class="day-bk day-sta day-dis uk-card-default uk-width-1-7">1</div>
-                </div>
-                <div class="uk-flex uk-margin-remove">
-                    <div class="day-bk day-sun day-dis uk-card-default uk-width-1-7">2</div>
-                    <div class="day-bk day-dis uk-card-default uk-width-1-7">3</div>
-                    <div class="day-bk day-dis uk-card-default uk-width-1-7">4</div>
-                    <div class="day-bk day-dis uk-card-default uk-width-1-7">5</div>
-                    <div class="day-bk day-dis uk-card-default uk-width-1-7">6</div>
-                    <div class="day-bk day-dis uk-card-default uk-width-1-7">7</div>
-                    <div class="day-bk day-sta day-dis uk-card-default uk-width-1-7">8</div>
                 </div> -->
+
+
+
+                        <!-- <div class="uk-flex uk-flex-column"> -->
+                        <div class="uk-flex flex-add">
+                            <div
+                                class="day-bk day-sun uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">28</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">29</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">30</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">31</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">1</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">2</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk day-sta uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">3</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-flex flex-add">
+                            <div class="day-bk day-sun uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">4</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">5</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">6</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">7</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">8</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">9</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk day-sta uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">10</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-flex flex-add">
+                            <div class="day-bk day-sun uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">11</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">12</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">13</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">14</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">15</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">16</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk day-sta uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">17</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-flex flex-add">
+                            <div class="day-bk day-sun uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">18</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">19</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">20</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">21</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">22</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">23</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk day-sta day-today uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">24</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-flex flex-add">
+                            <div class="day-bk day-sun uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">25</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">26</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">27</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">28</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">29</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">30</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div
+                                class="day-bk day-sta uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">1</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-flex flex-add">
+                            <div
+                                class="day-bk day-sun uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sun">2</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">3</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">4</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">5</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">6</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div class="day-bk uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small">7</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <div
+                                class="day-bk day-sta uk-background-muted uk-card-default uk-width-1-7 uk-position-relative">
+                                <div class="uk-padding-small day-sat">8</div>
+                                <div class="uk-position-absolute uk-position-center"><span class="ptfont">1</span>pt
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
-    <!-- <div class="calendar-container">
-        <div class="calendar-header">
-            <h1>
-                12月
-                <button>▾</button>
-            </h1>
-            <p>2018</p>
-        </div>
-        <div class="calendar"><span class="day-name">月</span><span class="day-name">火</span><span
-                class="day-name">水</span><span class="day-name">木</span><span class="day-name">金</span><span
-                class="day-name blue">土</span><span class="day-name red">日</span>
-            <div class="day day--disabled">30</div>
-            <div class="day day--disabled">31</div>
-            <div class="day">1</div>
-            <div class="day">2</div>
-            <div class="day">3</div>
-            <div class="day">4</div>
-            <div class="day">5</div>
-            <div class="day">6</div>
-            <div class="day">7</div>
-            <div class="day">8</div>
-            <div class="day">9</div>
-            <div class="day">10</div>
-            <div class="day">11</div>
-            <div class="day">12</div>
-            <div class="day">13</div>
-            <div class="day">14</div>
-            <div class="day">15</div>
-            <div class="day">16</div>
-            <div class="day">17</div>
-            <div class="day">18</div>
-            <div class="day">19</div>
-            <div class="day">20</div>
-            <div class="day">21</div>
-            <div class="day">22</div>
-            <div class="day">23</div>
-            <div class="day">24</div>
-            <div class="day">25</div>
-            <div class="day">26</div>
-            <div class="day">27</div>
-            <div class="day">28</div>
-            <div class="day">29</div>
-            <div class="day">30</div>
-            <div class="day">31</div>
-            <div class="day day--disabled">1</div>
-            <div class="day day--disabled">2</div>
-            <section class="task task--warning">プロジェクト見積もり</section>
-            <section class="task task--danger">デザイン・打ち合わせ</section>
-            <section class="task task--primary">コーディング
-                <div class="task__detail">
-                    <h2>担当</h2>
-                    <p>田中・高橋・鈴木</p>
-                </div>
-            </section>
-            <section class="task task--info">ローンチ</section>
-        </div>
-    </div> -->
-
 </body>
 
 </html>
