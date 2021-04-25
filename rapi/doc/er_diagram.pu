@@ -1,0 +1,67 @@
+@startuml tables
+entity treatment_history {
+    [履歴ID]
+    [治療日]
+    [治療ID]
+    [タイミングID]
+    [コマンドID]
+    [選択ID]
+}
+
+entity treatment_action {
+    [コマンドID]
+    [コマンド]
+    [組み合わせID]
+}
+
+entity treatment_action_method {
+    [選択ID]
+    [選択肢]
+    [オプション値]
+}
+
+entity treatment_action_method_conbination {
+    [組み合わせID]
+    [選択ID]
+    [並び順]
+    [デフォルトflag]
+}
+
+entity treatment_judgement {
+    [判断ID]
+    [判断条件]
+    [判断内容]
+}
+
+entity treatment_timing {
+    [タイミングID]
+    [治療タイミング]
+}
+
+entity treatment_timing_relation {
+    [治療ID]
+    [タイミングID]
+    [コマンド組み合わせID]
+}
+
+entity treatment_action_conbination {
+    [組み合わせID]
+    [コマンドID]
+    [並び順]
+}
+
+entity treatment {
+    [治療ID]
+    [項目名]
+}
+
+
+' entity companies as "companies\n会社" {
+'   + id [PK]
+'   --
+'   name [会社名]
+'   created_at [作成日]
+'   updated_at [更新日]
+' }
+
+@enduml
