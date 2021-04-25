@@ -26,27 +26,18 @@ header h1 {
   padding-left: 10px;
 }
 
-.flex-add {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+.flex-expand {
+  flex: 1 1 0%;
 }
 
-.cal-body .day-bk {
+.calendar-days .calendar-day {
   color: #98a0a6;
-  /* height: calc(100vh / 6); */
-  /* width: calc(100% / 7); */
 }
-.week-day {
-  width: calc(100% / 7);
-}
-.week .uk-card-default{
+
+.calendar-week .uk-card-default{
   background-color: #CCCCCC;
 }
 
-.week {
-  flex-grow: 0;
-}
 .day-sat {
   color: #34A0F2;
 }
@@ -55,24 +46,17 @@ header h1 {
   color: #FA6964;
 }
 
-.cal-body .day-block {
-  color: #98a0a6;
-  width: calc(100% / 7.08);
-  border: 1px solid rgba(166, 168, 179, 0.12);
-  height: 120px;
-}
-
-.uk-card-default.day-today {
+.calendar-day.day-today {
   background-color: #FFFFBB;
 }
-.ptfont {
+.treat-pt {
   font-size: 1.8em;
 }
 
-.area {
+.calendar-container {
   height: 100%;
 }
 
-.cal-header {
-  flex-grow: 0;
+.main-container {
+  height: 100%;
 }
