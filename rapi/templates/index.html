@@ -52,6 +52,9 @@
                 <button>▾</button>
             </h1>
             <p>2018</p>
+            {% for action in actions %}
+            <p>{{ action.name }}</p>
+            {% endfor %}
         </div>
         <div class="calendar"><span class="day-name">月</span><span class="day-name">火</span><span
                 class="day-name">水</span><span class="day-name">木</span><span class="day-name">金</span><span
