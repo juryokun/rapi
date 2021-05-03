@@ -16,3 +16,8 @@ pub struct Action {
     pub treatment_id: i32,
     pub name: String,
 }
+#[derive(Insertable)]
+#[table_name = "treatment"]
+pub struct NewTreatment {
+    pub name: String,
+}

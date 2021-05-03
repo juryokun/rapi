@@ -36,6 +36,13 @@ pub fn establish_connection() -> PgConnection {
 async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
     use schema::treatment::dsl::*;
     let connection = establish_connection();
+    let new_treatment = NewTreatment {
+        name: String::from("nanika"),
+    };
+    diesel::insert_into(treatment)
+        .values(&new_treatment)
+        .execute(&connection)
+        .unwrap();
     let treatment_data = treatment
         // .limit(5)
         .first::<Treatment>(&connection)
