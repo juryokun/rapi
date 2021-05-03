@@ -21,6 +21,7 @@ use actix_web::middleware::{errhandlers::ErrorHandlerResponse, errhandlers::Erro
 use actix_web::{
     dev, error, get, http, middleware, web, App, Error, HttpResponse, HttpServer, Responder,
 };
+use serde::{Deserialize, Serialize};
 use tera::Tera;
 
 //Sqliteコネクションを作る。
@@ -33,15 +34,25 @@ pub fn establish_connection() -> PgConnection {
 }
 
 async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
-    use schema::posts::dsl::*;
+    use schema::treatment::dsl::*;
     let connection = establish_connection();
-    let result = posts
+    let new_treatment = NewTreatment {
+        name: String::from("nanika"),
+    };
+    diesel::insert_into(treatment)
+        .values(&new_treatment)
+        .execute(&connection)
+        .unwrap();
+    let treatment_data = treatment
         // .limit(5)
-        .first::<Post>(&connection)
+        .first::<Treatment>(&connection)
         .expect("Error loading posts");
+    let actions = Action::belonging_to(&treatment_data)
+        .load::<Action>(&connection)
+        .expect("error on load actions");
 
     let mut ctx = tera::Context::new();
-    ctx.insert("name", &result.title);
+    ctx.insert("actions", &actions);
     let view = tmpl
         .render("index.html", &ctx)
         .map_err(|e| error::ErrorInternalServerError(e))?;

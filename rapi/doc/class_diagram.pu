@@ -1,0 +1,32 @@
+class treatment {
+    id: number <<治療ID>>
+    name: string <<治療名>>
+}
+
+class action {
+    id: number <<アクションID>>
+    treatment_id: number <<治療ID>>
+    name: string <<アクション名>>
+}
+
+class command {
+    id: number <<コマンドID>>
+    action_id: number <<アクションID>>
+    name: string <<コマンド名>>
+    option: number <<オプション値>>
+}
+
+class action_timing {
+    id: number <<タイミングID>>
+    action_id: number <<アクションID>>
+    name: string <<タイミング名>>
+}
+
+class treatment_history {
+    id: number <<履歴ID>>
+    date: date <<日付>>
+    action_id: number <<アクションID>>
+    command_id: number <<コマンドID>>
+    timing_id: number <<タイミングID>>
+    option: number <<オプション値>>
+}
