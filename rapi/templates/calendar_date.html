@@ -1,0 +1,15 @@
+<div
+    class="{% if calendar_date.is_today %}day-today{% endif %}{% if calendar_date.is_muted %}uk-background-muted{% endif %} calendar-day uk-card-default uk-width-1-7 uk-position-relative">
+    {% if calendar_date.weekday == 0 %}
+    <div class="uk-padding-small day-sun">
+    {% elif calendar_date.weekday == 6 %}
+    <div class="uk-padding-small day-sat">
+    {% else %}
+    <div class="uk-padding-small">
+    {% endif %}
+        <a class="uk-link-text" hrdf="#">{{ calendar_date.date }}</a>
+    </div>
+    <div class="uk-position-absolute uk-position-center">
+        <span class="treat-pt">{{ calendar_date.point }}</span>pt
+    </div>
+</div>

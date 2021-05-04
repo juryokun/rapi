@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    {% block static %}
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit-icons.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="static/base.css">
+    {% endblock static %}
+
+    {% block title %}
+    {% endblock title %}
+</head>
+
+<body>
+    <div class="uk-flex uk-flex-column body-container">
+        <div class="uk-height-auto header-container">
+            {% block header %}
+            {% endblock header %}
+
+            {% block offcanvas %}
+            {% endblock offcanvas %}
+        </div>
+
+        {% block main %}
+        {% endblock main %}
+    </div>
+</body>
+
+</html>
