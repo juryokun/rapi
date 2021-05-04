@@ -16,6 +16,15 @@ table! {
 }
 
 table! {
+    posts (id) {
+        id -> Int4,
+        title -> Varchar,
+        body -> Text,
+        published -> Bool,
+    }
+}
+
+table! {
     timing (id) {
         id -> Int4,
         action_id -> Int4,
@@ -48,4 +57,11 @@ joinable!(treatment_history -> action (action_id));
 joinable!(treatment_history -> command (command_id));
 joinable!(treatment_history -> timing (timing_id));
 
-allow_tables_to_appear_in_same_query!(action, command, timing, treatment, treatment_history,);
+allow_tables_to_appear_in_same_query!(
+    action,
+    command,
+    posts,
+    timing,
+    treatment,
+    treatment_history,
+);

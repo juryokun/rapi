@@ -1542,6 +1542,7 @@ dependencies = [
  "actix-files",
  "actix-rt",
  "actix-web",
+ "chrono",
  "diesel",
  "dotenv",
  "env_logger",

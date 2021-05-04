@@ -1,0 +1,27 @@
+header .site-header {
+  color: #FFF;
+  padding: 7px 0px 7px 15px;
+  /* font-size: 1.2em; */
+}
+
+header h1 {
+  padding: 0px;
+  margin: 0px;
+  font-size: 1.4em;
+  color: #FFF;
+}
+
+.body-container {
+  height: 100vh;
+  /* width: 100%; */
+  /* color: #51565d; */
+  box-sizing: border-box;
+  background: #f5f7fa;
+}
+
+.header-container {
+}
+
+.header-element {
+  padding-left: 10px;
+}
