@@ -22,7 +22,8 @@ pub struct Action {
     pub name: String,
 }
 
-#[derive(Identifiable, Serialize, QueryableByName, Debug)]
+#[derive(Identifiable, Serialize, Queryable, Associations, Debug, PartialEq, Clone, Copy)]
+#[belongs_to(Treatment)]
 #[table_name = "treatment_summary"]
 pub struct TreatmentSummary {
     pub id: i32,

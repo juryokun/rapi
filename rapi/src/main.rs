@@ -15,6 +15,7 @@ use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use diesel::sql_query;
 use diesel::sql_types::*;
+use diesel::Expression;
 use dotenv::dotenv;
 use std::env;
 
@@ -27,6 +28,11 @@ use serde::{Deserialize, Serialize};
 use tera::Tera;
 
 use chrono::{Date, Datelike, Duration, Local, NaiveDate, TimeZone, Utc, Weekday};
+use std::collections::HashMap;
+
+const WEEKS: i64 = 6;
+const DAYS_IN_WEEK: i64 = 7;
+const DAYS_IN_CALENDAR: i64 = WEEKS * DAYS_IN_WEEK;
 
 //Sqliteコネクションを作る。
 pub fn establish_connection() -> PgConnection {
@@ -38,33 +44,6 @@ pub fn establish_connection() -> PgConnection {
 }
 
 async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
-    use schema::treatment_summary::dsl::*;
-    let connection = establish_connection();
-    // let new_treatment = NewTreatment {
-    //     name: String::from("nanika"),
-    // };
-    // diesel::insert_into(treatment)
-    //     .values(&new_treatment)
-    //     .execute(&connection)
-    //     .unwrap();
-    let treatment_summaries: Vec<TreatmentSummary> = sql_query(
-        "SELECT id,
-                treatment_id,
-                date,
-                max_point,
-                mode_point
-        FROM treatment_summary ts
-        WHERE DATE_PART('month', ts.date) = $1",
-    )
-    .bind::<Integer, _>(5)
-    .get_results(&connection)
-    .unwrap();
-    println!("{:?}", treatment_summaries);
-    // .first::<TreatmentSummary>(&connection)
-    // .expect("Error loading treatment_summary");
-    // let actions = Action::belonging_to(&treatment_data)
-    //     .load::<Action>(&connection)
-    //     .expect("error on load actions");
     let calendar_dates = get_calendar_dates();
 
     let today = Utc::today();
@@ -85,12 +64,34 @@ fn get_calendar_dates() -> Vec<CalendarDate> {
     let target_date: Date<Utc> = Utc.ymd(today.year(), today.month(), 1);
 
     let start_date = get_start_date_in_calendar(target_date);
+    let treatment_summaries = get_treatment_summaries(start_date);
 
     let mut dates: Vec<CalendarDate> = vec![];
-    for i in 0..42 {
-        dates.push(CalendarDate::new(start_date + Duration::days(i)));
+    for i in 0..DAYS_IN_CALENDAR {
+        let target_date = start_date + Duration::days(i);
+        dates.push(CalendarDate::new(
+            target_date,
+            treatment_summaries.get(&target_date.naive_local()),
+        ));
     }
     dates
+}
+
+fn get_treatment_summaries(start_date: Date<Utc>) -> HashMap<NaiveDate, TreatmentSummary> {
+    use schema::treatment_summary::dsl::*;
+    let connection = establish_connection();
+
+    let end_date = start_date + Duration::days(DAYS_IN_CALENDAR);
+    let summaries = treatment_summary
+        .filter(date.between(start_date.naive_local(), end_date.naive_local()))
+        .load::<TreatmentSummary>(&connection)
+        .unwrap();
+
+    let mut treatment_summaries = HashMap::new();
+    for summary in summaries {
+        treatment_summaries.insert(summary.date, summary);
+    }
+    treatment_summaries
 }
 
 fn get_start_date_in_calendar(first_date: Date<Utc>) -> Date<Utc> {
@@ -147,13 +148,25 @@ struct CalendarDate {
     date: u32,
     is_today: bool,
     weekday: i8,
-    point: i8,
+    max_point: i32,
+    mode_point: i32,
     is_muted: bool,
 }
 
 impl CalendarDate {
-    fn new(target: Date<Utc>) -> Self {
-        let weekday = match target.weekday() {
+    fn new(target: Date<Utc>, summary: Option<&TreatmentSummary>) -> Self {
+        let today = Utc::today();
+        Self {
+            date: target.day(),
+            is_today: today == target,
+            weekday: Self::weekday_to_number(target),
+            max_point: Self::extract_max_point(summary),
+            mode_point: Self::extract_mode_point(summary),
+            is_muted: today.month() != target.month(),
+        }
+    }
+    fn weekday_to_number(target: Date<Utc>) -> i8 {
+        match target.weekday() {
             Weekday::Sun => 0,
             Weekday::Mon => 1,
             Weekday::Tue => 2,
@@ -161,14 +174,18 @@ impl CalendarDate {
             Weekday::Thu => 4,
             Weekday::Fri => 5,
             Weekday::Sat => 6,
-        };
-        let today = Utc::today();
-        Self {
-            date: target.day(),
-            is_today: today == target,
-            weekday: weekday,
-            point: 0,
-            is_muted: today.month() != target.month(),
+        }
+    }
+    fn extract_max_point(summary: Option<&TreatmentSummary>) -> i32 {
+        match summary {
+            Some(treatment_summary) => treatment_summary.max_point.unwrap(),
+            None => 0,
+        }
+    }
+    fn extract_mode_point(summary: Option<&TreatmentSummary>) -> i32 {
+        match summary {
+            Some(treatment_summary) => treatment_summary.mode_point.unwrap(),
+            None => 0,
         }
     }
 }
@@ -185,9 +202,24 @@ fn test_get_calendar_dates() {
     let calendar_dates = get_calendar_dates();
     let mut compared_dates = vec![];
     let target = Utc.ymd(2021, 4, 25);
-    for i in 0..42 {
-        compared_dates.push(CalendarDate::new(target + Duration::days(i)));
-    }
+    // for i in 0..42 {
+    //     compared_dates.push(CalendarDate::new(target + Duration::days(i)));
+    // }
 
-    assert_eq!(compared_dates, calendar_dates);
+    // assert_eq!(compared_dates, calendar_dates);
+}
+
+#[test]
+fn test_get_treatment_summaries() {
+    let start_date = Utc.ymd(2021, 4, 25);
+    let summaries = get_treatment_summaries(start_date);
+    let ymd = Utc.ymd(2021, 5, 5).naive_local();
+    let compare = TreatmentSummary {
+        id: 1,
+        treatment_id: 1,
+        date: ymd,
+        max_point: Some(2),
+        mode_point: Some(1),
+    };
+    assert_eq!(summaries[&ymd], compare);
 }
