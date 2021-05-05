@@ -52,6 +52,8 @@ async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
     let mut ctx = tera::Context::new();
     ctx.insert("calendar_dates", &calendar_dates);
     ctx.insert("calendar_month", &calendar_month);
+    ctx.insert("weeks", &WEEKS);
+    ctx.insert("days", &DAYS_IN_WEEK);
     let view = tmpl
         .render("index.html", &ctx)
         .map_err(|e| error::ErrorInternalServerError(e))?;
@@ -146,11 +148,11 @@ async fn main() -> std::io::Result<()> {
 #[derive(Debug, Serialize, PartialEq)]
 struct CalendarDate {
     date: u32,
-    is_today: bool,
-    weekday: i8,
+    today_class: String,
+    weekday_class: String,
     max_point: i32,
     mode_point: i32,
-    is_muted: bool,
+    muted_class: String,
 }
 
 impl CalendarDate {
@@ -158,22 +160,30 @@ impl CalendarDate {
         let today = Utc::today();
         Self {
             date: target.day(),
-            is_today: today == target,
-            weekday: Self::weekday_to_number(target),
+            today_class: Self::get_today_class(&target, &today),
+            weekday_class: Self::get_weekday_class(target),
             max_point: Self::extract_max_point(summary),
             mode_point: Self::extract_mode_point(summary),
-            is_muted: today.month() != target.month(),
+            muted_class: Self::get_muted_class(&target, &today),
         }
     }
-    fn weekday_to_number(target: Date<Utc>) -> i8 {
+    fn get_today_class(target: &Date<Utc>, today: &Date<Utc>) -> String {
+        if today == target {
+            return "day-today".to_string();
+        }
+        Self::get_none_class()
+    }
+    fn get_muted_class(target: &Date<Utc>, today: &Date<Utc>) -> String {
+        if today.month() != target.month() {
+            return "uk-background-muted".to_string();
+        }
+        Self::get_none_class()
+    }
+    fn get_weekday_class(target: Date<Utc>) -> String {
         match target.weekday() {
-            Weekday::Sun => 0,
-            Weekday::Mon => 1,
-            Weekday::Tue => 2,
-            Weekday::Wed => 3,
-            Weekday::Thu => 4,
-            Weekday::Fri => 5,
-            Weekday::Sat => 6,
+            Weekday::Sun => "day-sun".to_string(),
+            Weekday::Sat => "day-sat".to_string(),
+            _ => Self::get_none_class(),
         }
     }
     fn extract_max_point(summary: Option<&TreatmentSummary>) -> i32 {
@@ -187,6 +197,9 @@ impl CalendarDate {
             Some(treatment_summary) => treatment_summary.mode_point.unwrap(),
             None => 0,
         }
+    }
+    fn get_none_class() -> String {
+        "".to_string()
     }
 }
 

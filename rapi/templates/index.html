@@ -44,9 +44,9 @@
                 </div>
             </div>
             <div class="uk-flex uk-flex-column calendar-days flex-expand">
-                {% for week_index in [0,1,2,3,4,5] %}
+                {% for week_index in range(end=weeks) %}
                 <div class="uk-flex flex-expand">
-                    {% for day_index in [0,1,2,3,4,5,6] %}
+                    {% for day_index in range(end=days) %}
                     {% set day_num = week_index*7 + day_index %}
                     {% set calendar_date = calendar_dates[day_num] %}
                     {% include "calendar_date.html" %}
