@@ -16,15 +16,6 @@ table! {
 }
 
 table! {
-    posts (id) {
-        id -> Int4,
-        title -> Varchar,
-        body -> Text,
-        published -> Bool,
-    }
-}
-
-table! {
     timing (id) {
         id -> Int4,
         action_id -> Int4,
@@ -50,18 +41,29 @@ table! {
     }
 }
 
+table! {
+    treatment_summary (id) {
+        id -> Int4,
+        treatment_id -> Int4,
+        date -> Date,
+        max_point -> Nullable<Int4>,
+        mode_point -> Nullable<Int4>,
+    }
+}
+
 joinable!(action -> treatment (treatment_id));
 joinable!(command -> action (action_id));
 joinable!(timing -> action (action_id));
 joinable!(treatment_history -> action (action_id));
 joinable!(treatment_history -> command (command_id));
 joinable!(treatment_history -> timing (timing_id));
+joinable!(treatment_summary -> treatment (treatment_id));
 
 allow_tables_to_appear_in_same_query!(
     action,
     command,
-    posts,
     timing,
     treatment,
     treatment_history,
+    treatment_summary,
 );

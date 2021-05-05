@@ -13,6 +13,8 @@ pub mod schema;
 
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
+use diesel::sql_query;
+use diesel::sql_types::*;
 use dotenv::dotenv;
 use std::env;
 
@@ -24,7 +26,7 @@ use actix_web::{
 use serde::{Deserialize, Serialize};
 use tera::Tera;
 
-use chrono::{Date, Datelike, Duration, Local, TimeZone, Utc, Weekday};
+use chrono::{Date, Datelike, Duration, Local, NaiveDate, TimeZone, Utc, Weekday};
 
 //Sqliteコネクションを作る。
 pub fn establish_connection() -> PgConnection {
@@ -36,7 +38,7 @@ pub fn establish_connection() -> PgConnection {
 }
 
 async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
-    use schema::treatment::dsl::*;
+    use schema::treatment_summary::dsl::*;
     let connection = establish_connection();
     // let new_treatment = NewTreatment {
     //     name: String::from("nanika"),
@@ -45,10 +47,21 @@ async fn index(tmpl: web::Data<Tera>) -> Result<HttpResponse, Error> {
     //     .values(&new_treatment)
     //     .execute(&connection)
     //     .unwrap();
-    // let treatment_data = treatment
-    //     // .limit(5)
-    //     .first::<Treatment>(&connection)
-    //     .expect("Error loading posts");
+    let treatment_summaries: Vec<TreatmentSummary> = sql_query(
+        "SELECT id,
+                treatment_id,
+                date,
+                max_point,
+                mode_point
+        FROM treatment_summary ts
+        WHERE DATE_PART('month', ts.date) = $1",
+    )
+    .bind::<Integer, _>(5)
+    .get_results(&connection)
+    .unwrap();
+    println!("{:?}", treatment_summaries);
+    // .first::<TreatmentSummary>(&connection)
+    // .expect("Error loading treatment_summary");
     // let actions = Action::belonging_to(&treatment_data)
     //     .load::<Action>(&connection)
     //     .expect("error on load actions");
